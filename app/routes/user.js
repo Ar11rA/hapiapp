@@ -22,5 +22,13 @@ export default [{
     description: 'Gets the List of All Users in the system',
     handler: controllers.user.read
   }
+},
+{
+  method: 'GET',
+  path: '/users/{id}',
+  config: {
+    description: 'Gets the List of one Users in the system',
+    handler: controllers.user.readOne
+  }
 }
 ];
