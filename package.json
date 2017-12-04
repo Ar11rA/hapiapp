@@ -1,0 +1,67 @@
+{
+  "name": "hapiapp",
+  "version": "1.0.0",
+  "description": "boilerplate hapi app",
+  "main": "index.js",
+  "scripts": {
+    "pm2start": "./node_modules/pm2/bin/pm2 start ./bootstrap.js",
+    "pm2monit": "./node_modules/pm2/bin/pm2 monit",
+    "pm2stop": "./node_modules/pm2/bin/pm2 stop bootstrap",
+    "start": "./node_modules/.bin/nodemon ./bootstrap.js",
+    "test": "./node_modules/mocha/bin/mocha tests/",
+    "migrate": "./node_modules/.bin/sequelize db:migrate",
+    "seed": "./node_modules/.bin/sequelize db:seed:all"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/skeep/hapiapp.git"
+  },
+  "keywords": [
+    "hapi",
+    "boilerplate"
+  ],
+  "author": "skeep",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/skeep/hapiapp/issues"
+  },
+  "homepage": "https://github.com/skeep/hapiapp#readme",
+  "dependencies": {
+    "@gar/hapi-json-api": "^2.0.4",
+    "aguid": "^1.0.4",
+    "babel": "^6.3.26",
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^4.1.6",
+    "babel-plugin-transform-async-to-module-method": "^6.3.13",
+    "babel-polyfill": "^6.3.14",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-es2015-node5": "^1.1.1",
+    "babel-preset-react": "^6.3.13",
+    "babel-preset-stage-0": "^6.3.13",
+    "babel-register": "^6.3.13",
+    "boom": "^7.1.1",
+    "dotenv": "^4.0.0",
+    "good": "^7.3.0",
+    "good-console": "^6.4.0",
+    "good-squeeze": "^5.0.2",
+    "hapi": "^16.6.2",
+    "hapi-cors": "^1.0.1",
+    "hapi-swagger": "^8.0.0",
+    "inert": "^4.2.1",
+    "joi": "^10.2.1",
+    "lodash": "^4.17.4",
+    "mysql": "^2.13.0",
+    "nodemon": "^1.12.1",
+    "pm2": "^2.8.0",
+    "sequelize": "^3.30.4",
+    "sequelize-cli": "^2.7.4",
+    "vision": "^4.1.1"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "eslint": "^4.10.0",
+    "eslint-plugin-react": "^7.4.0",
+    "mocha": "^4.0.1",
+    "sinon": "^4.1.1"
+  }
+}
