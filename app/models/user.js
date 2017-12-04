@@ -5,13 +5,15 @@ export default (sequelize, DataTypes) => {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
-      type: DataTypes.INTEGER,
+      type: DataTypes.INTEGER
     },
     username: DataTypes.STRING
   }, {
     classMethods: {
       associate: (models) => {
-        // associations can be defined here
+        user.hasMany(models.post, {
+          foreignKey: 'user_id'
+        })
       }
     }
   });

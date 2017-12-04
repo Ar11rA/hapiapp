@@ -4,6 +4,9 @@
   "description": "boilerplate hapi app",
   "main": "index.js",
   "scripts": {
+    "pm2start": "./node_modules/pm2/bin/pm2 start ./bootstrap.js",
+    "pm2monit": "./node_modules/pm2/bin/pm2 monit",
+    "pm2stop": "./node_modules/pm2/bin/pm2 stop bootstrap",
     "start": "./node_modules/.bin/nodemon ./bootstrap.js",
     "test": "./node_modules/mocha/bin/mocha tests/",
     "migrate": "./node_modules/.bin/sequelize db:migrate",
@@ -49,6 +52,7 @@
     "lodash": "^4.17.4",
     "mysql": "^2.13.0",
     "nodemon": "^1.12.1",
+    "pm2": "^2.8.0",
     "sequelize": "^3.30.4",
     "sequelize-cli": "^2.7.4",
     "vision": "^4.1.1"
