@@ -15,3 +15,8 @@
 - sequelize for ORM
 - mysql for DB
 - redis for cache
+- jwt and bcrypt for auth
+
+## Overview
+
+API written with best practices.

@@ -17,7 +17,6 @@ const hapiOptions = {
   }
 };
 
-
 const plugins = [
   {
     register: JsonApi,
@@ -67,7 +66,7 @@ server.start(err => {
   if (err) {
     throw err;
   }
-  console.log( `Server started at ${ server.info.uri }` );
+  console.log(`Server started at ${ server.info.uri }`);
 });
 
 export default server;

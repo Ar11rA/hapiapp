@@ -15,7 +15,7 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate: function(models) {
         post.belongsTo(models.user, {
-          onDelete: "CASCADE",
+          onDelete: 'CASCADE',
           foreignKey: 'user_id'
         });
       }

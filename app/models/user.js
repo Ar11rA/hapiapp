@@ -7,13 +7,14 @@ export default (sequelize, DataTypes) => {
       primaryKey: true,
       type: DataTypes.INTEGER
     },
-    username: DataTypes.STRING
+    username: DataTypes.STRING,
+    password: DataTypes.STRING,
   }, {
     classMethods: {
       associate: (models) => {
         user.hasMany(models.post, {
           foreignKey: 'user_id'
-        })
+        });
       }
     }
   });

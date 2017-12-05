@@ -37,7 +37,10 @@ const readOne = async (request, reply) => {
 
 const create = async (request, reply) => {
   try {
-    const result = await models.user.create({username: request.payload.username});
+    const result = await models.user.create({
+      username: request.payload.username,
+      password: request.payload.password
+    });
     reply({'Users': result});
   }
   catch(exception) {
