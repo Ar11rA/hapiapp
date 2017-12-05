@@ -20,3 +20,14 @@
 ## Overview
 
 API written with best practices.
+
+## Naming Conventions
+
+CRUD followed in api, so functions for the same are written in controllers as -
+
+C - create
+R - read(for all), readOne(for one id)
+U - update
+D - destroy
+
+only read is for fetching all data, other functions are for single entries.

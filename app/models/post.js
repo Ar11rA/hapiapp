@@ -1,5 +1,5 @@
 'use strict';
-module.exports = function(sequelize, DataTypes) {
+export default (sequelize, DataTypes) => {
   const post = sequelize.define('post', {
     id: {
       allowNull: false,

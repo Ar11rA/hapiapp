@@ -1,6 +1,6 @@
 import models from '../models';
 import Boom from 'boom';
-const readAll = async (request, reply) => {
+const read = async (request, reply) => {
   try {
     const result = await models.post.findAll();
     reply({'Posts': result});
@@ -36,7 +36,7 @@ const create = async (request, reply) => {
   }
 };
 
-const deletePost = async (request, reply) => {
+const destroy = async (request, reply) => {
   try {
     const result = await models.post.destroy({
       where: {
@@ -51,4 +51,4 @@ const deletePost = async (request, reply) => {
 };
 
 
-export default {readAll, readOne, create, deletePost};
+export default {read, readOne, create, destroy};

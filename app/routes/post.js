@@ -6,7 +6,7 @@ export default [{
   method: 'POST',
   path: '/posts',
   config: {
-    description: 'Inserts one user into the system',
+    description: 'Inserts one post into the system',
     handler: controllers.post.create,
     validate: {
       payload: {
@@ -22,15 +22,15 @@ export default [{
   method: 'GET',
   path: '/posts',
   config: {
-    description: 'Gets the List of All Users in the system',
-    handler: controllers.post.readAll
+    description: 'Gets the List of All posts in the system',
+    handler: controllers.post.read
   }
 },
 {
   method: 'GET',
   path: '/posts/{id}',
   config: {
-    description: 'Gets the List of All Users in the system',
+    description: 'Gets one post matching id in the request',
     handler: controllers.post.readOne
   }
 },
@@ -38,8 +38,8 @@ export default [{
   method: 'DELETE',
   path: '/posts/{id}',
   config: {
-    description: 'Gets the List of All Users in the system',
-    handler: controllers.post.deletePost
+    description: 'Deletes the post with matching id from the system',
+    handler: controllers.post.destroy
   }
 }
 ];
