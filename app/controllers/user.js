@@ -1,5 +1,7 @@
 import models from '../models';
 import Boom from 'boom';
+import bcrypt from 'bcrypt';
+
 const read = async (request, reply) => {
   try {
     const result = await models.user.findAll({
@@ -37,9 +39,11 @@ const readOne = async (request, reply) => {
 
 const create = async (request, reply) => {
   try {
+    const password = request.payload.password
+    const hashedPassword = await bcrypt.hash(password, 10)
     const result = await models.user.create({
       username: request.payload.username,
-      password: request.payload.password
+      password: hashedPassword
     });
     reply({'Users': result});
   }
