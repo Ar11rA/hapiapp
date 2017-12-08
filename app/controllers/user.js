@@ -1,7 +1,7 @@
 import models from '../models';
 import Boom from 'boom';
 import bcrypt from 'bcrypt';
-import JWT from 'jsonwebtoken';
+import { decode } from '../authentication/jwtHelpers';
 
 const read = async (request, reply) => {
   try {
@@ -21,7 +21,7 @@ const read = async (request, reply) => {
 
 const readOne = async (request, reply) => {
   try {
-    const { id, username } = await JWT.verify(request.headers.authorization, 'secret');
+    const { id, username } = await decode(request.headers.authorization);
     if(id != request.params.id) {
       reply(Boom.unauthorized('Invalid user ID'))
     }

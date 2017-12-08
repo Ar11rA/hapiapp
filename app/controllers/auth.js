@@ -1,7 +1,7 @@
 import models from '../models';
 import Boom from 'boom';
 import bcrypt from 'bcrypt';
-import JWT from 'jsonwebtoken';
+import { encode } from '../authentication/jwtHelpers';
 import mailer from '../mailers';
 
 const login = async (request, reply) => {
@@ -17,7 +17,8 @@ const login = async (request, reply) => {
     }
     const id = result.dataValues.id;
     const hash = result.dataValues.password;
-    await bcrypt.compare(password, hash) ? reply({'token': JWT.sign({ id, username }, 'secret')}) : reply(Boom.unauthorized('Wrong Password'));
+    const user = { id, username }
+    await bcrypt.compare(password, hash) ? reply({'token': await encode(user)}) : reply(Boom.unauthorized('Wrong Password'));
   }
   catch(exception) {
     reply(Boom.badImplementation('Error login in:', exception));
