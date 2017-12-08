@@ -1,6 +1,7 @@
 import models from '../models';
 import Boom from 'boom';
 import bcrypt from 'bcrypt';
+import JWT from 'jsonwebtoken';
 
 const read = async (request, reply) => {
   try {
@@ -20,6 +21,10 @@ const read = async (request, reply) => {
 
 const readOne = async (request, reply) => {
   try {
+    const { id, username } = await JWT.verify(request.headers.authorization, 'secret');
+    if(id != request.params.id) {
+      reply(Boom.unauthorized('Invalid user ID'))
+    }
     const result = await models.user.findAll({
       where: {
         id: request.params.id

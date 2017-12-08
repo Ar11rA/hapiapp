@@ -7,6 +7,7 @@ export default [{
   method: 'POST',
   path: '/login',
   config: {
+    auth: false,
     description: 'Inserts one post into the system',
     handler: controllers.auth.login,
     validate: {

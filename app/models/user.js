@@ -15,6 +15,19 @@ export default (sequelize, DataTypes) => {
         user.hasMany(models.post, {
           foreignKey: 'user_id'
         });
+      },
+      validate: (decoded, request, callback) => {
+        const promise = user.findOne({where: {id: decoded.id}});
+        promise.then((data) => {
+          if(data === null){
+            return callback(null, false);
+          } else {
+            return callback(null, true);
+          }
+        });
+        promise.catch((e) => {
+          return callback(null, false);
+        });
       }
     }
   });

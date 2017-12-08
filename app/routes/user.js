@@ -20,6 +20,7 @@ export default [{
   method: 'GET',
   path: '/users',
   config: {
+    auth: false,
     description: 'Gets the List of All Users in the system',
     handler: controllers.user.read
   }

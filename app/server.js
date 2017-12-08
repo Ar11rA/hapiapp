@@ -9,6 +9,8 @@ import HapiSwagger from 'hapi-swagger';
 import Pack from '../package';
 import JsonApi from '@gar/hapi-json-api';
 import HapiCors from 'hapi-cors';
+import HapiAuthJwt from 'hapi-auth-jwt2';
+import models from './models';
 
 const hapiOptions = {
   info: {
@@ -18,6 +20,7 @@ const hapiOptions = {
 };
 
 const plugins = [
+  HapiAuthJwt,
   {
     register: JsonApi,
     options: {}
@@ -53,6 +56,8 @@ const plugins = [
   }
 ];
 
+ 
+
 const server = new Hapi.Server();
 server.connection({port: 9999, host: 'localhost', routes: { cors: true }});
 server.route(routes);
@@ -60,6 +65,12 @@ server.register(plugins, (err) => {
   if (err) {
     throw err;
   }
+  server.auth.strategy(
+    'jwt', 'jwt', { key: 'secret',
+                    validateFunc: models.user.validate, 
+                    verifyOptions: { algorithms: [ 'HS256' ] }
+                  });
+  server.auth.default('jwt');
 });
 
 server.start(err => { 
