@@ -16,5 +16,18 @@ export default [{
       }
     }
   }
+},
+{
+  method: 'POST',
+  path: '/forgot',
+  config: {
+    description: 'Sends mail for forgotten password',
+    handler: controllers.auth.forgotPassword,
+    validate: {
+      payload: {
+        email: Joi.string().required()
+      }
+    }
+  }
 }
 ];

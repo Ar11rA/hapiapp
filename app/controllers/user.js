@@ -47,7 +47,7 @@ const create = async (request, reply) => {
     });
     reply({'Users': result});
   }
-  catch(exception) {
+  catch(exception) {  
     reply(Boom.badImplementation('Error creating user:', exception))
   }
 };
