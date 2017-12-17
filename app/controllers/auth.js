@@ -7,7 +7,12 @@ import mailer from '../mailers';
 const login = async (request, reply) => {
   try {
     const { username, password } = request.payload;
-    const result = await models.user.findOne({where: {username: username}});
+    const result = await models.user.findOne({
+      where: 
+        {
+          username: username
+        }
+    });
     !result && reply(Boom.unauthorized('User not registered'))
     const id = result.dataValues.id;
     const hash = result.dataValues.password;
@@ -43,9 +48,8 @@ const changePassword = async (request, reply) => {
   try {
     const { email, oldPassword, newPassword, confirmPassword } = request.payload
     const user = await models.user.findOne({where: {username: email}});
-    const hash = user.dataValues.password;
-    const id = user.dataValues.id;
-    const isPasswordCorrect = await bcrypt.compare(oldPassword, hash)
+    const { id, password } = user.dataValues
+    const isPasswordCorrect = await bcrypt.compare(oldPassword, password)
     !isPasswordCorrect && reply(Boom.unauthorized('User not registered'))
     newPassword === confirmPassword ? updatePassword(id, newPassword, reply) : reply(Boom.badImplementation('Error:', exception));
   }
