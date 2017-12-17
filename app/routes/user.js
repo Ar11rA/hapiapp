@@ -10,7 +10,7 @@ export default [{
     handler: controllers.user.create,
     validate: {
       payload: {
-        username: Joi.string().alphanum().min(3).max(30).required(),
+        username: Joi.string().email(),
         password: Joi.string().alphanum().min(8).max(30).required(),
       }
     }

@@ -6,15 +6,9 @@ import mailer from '../mailers';
 
 const login = async (request, reply) => {
   try {
-    const { username, password } = request.payload
-    const result = await models.user.findOne({
-      where: {
-        username: username
-      }
-    });
-    if(!result) {
-      reply(Boom.unauthorized('User not registered'))
-    }
+    const { username, password } = request.payload;
+    const result = await models.user.findOne({where: {username: username}});
+    !result && reply(Boom.unauthorized('User not registered'))
     const id = result.dataValues.id;
     const hash = result.dataValues.password;
     const user = { id, username }
@@ -26,23 +20,57 @@ const login = async (request, reply) => {
 };
 
 const forgotPassword = async (request, reply) => {
-  const email = request.payload.email
-  const result = await mailer.sendPassword(email)
-  // update user password here
-  reply({
-    status: 'true'
-  })
+  try {
+    const email = request.payload.email;
+    const password = await mailer.sendPassword(email);
+    const hashedPassword = await bcrypt.hash(password, 10)
+    const result = await models.user.update({
+      password: hashedPassword
+    },
+    {
+      where: {username: email}
+    });
+    reply({
+      status: 'true'
+    })
+  }
+  catch(exception) {
+    reply(Boom.badImplementation('Error:', exception))
+  }
 };
 
 const changePassword = async (request, reply) => {
-  const { email, oldPassword, newPassword, confirmPassword } = request.payload
-  // logic to check
- 
-  // login to update user password
+  try {
+    const { email, oldPassword, newPassword, confirmPassword } = request.payload
+    const user = await models.user.findOne({where: {username: email}});
+    const hash = user.dataValues.password;
+    const id = user.dataValues.id;
+    const isPasswordCorrect = await bcrypt.compare(oldPassword, hash)
+    !isPasswordCorrect && reply(Boom.unauthorized('User not registered'))
+    newPassword === confirmPassword ? updatePassword(id, newPassword, reply) : reply(Boom.badImplementation('Error:', exception));
+  }
+  catch(exception) {
+    reply(Boom.badImplementation('Error:', exception))
+  }
+};
+
+const updatePassword = async (id, password, reply) => {
+  try {
+  const hashedPassword = await bcrypt.hash(password, 10)
+  const user = await models.user.update({
+    password: hashedPassword
+  },
+  {
+    where: {id: id}
+  });
   reply({
     status: 'true'
   })
-};
+  }
+  catch(exception) {
+    throw(Boom.badImplementation('Error:', exception))
+  }
+}
 
 export default { login, forgotPassword, changePassword }
 

@@ -67,9 +67,9 @@ server.register(plugins, (err) => {
   }
   server.auth.strategy(
     'jwt', 'jwt', { key: 'secret',
-                    validateFunc: models.user.validate, 
-                    verifyOptions: { algorithms: [ 'HS256' ] }
-                  });
+      validateFunc: models.user.validate, 
+      verifyOptions: { algorithms: [ 'HS256' ] }
+    });
   server.auth.default('jwt');
 });
 
