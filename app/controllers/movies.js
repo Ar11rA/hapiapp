@@ -7,9 +7,19 @@ const getRandom = async (request, reply) => {
     reply(result);
   }
   catch(exception) {
-    reply(Boom.badImplementation('Error reading Posts:', exception));
+    reply(Boom.badImplementation('Error reading Movies:', exception));
+  }
+};
+
+const getFirst = async (request, reply) => {
+  try {
+    const result = await models.movie.findById(1);
+    reply(result);
+  }
+  catch(exception) {
+    reply(Boom.badImplementation('Error reading Movies:', exception));
   }
 };
 
 
-export default {getRandom};
+export default {getRandom, getFirst};

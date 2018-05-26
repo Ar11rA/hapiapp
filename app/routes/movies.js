@@ -9,5 +9,13 @@ export default [
       description: 'Gets the List of All Users in the system',
       handler: controllers.movies.getRandom
     }
+  },
+  {
+    method: 'GET',
+    path: '/movies/first',
+    config: {
+      description: 'Gets the List of All Users in the system',
+      handler: controllers.movies.getFirst
+    }
   }
 ];
