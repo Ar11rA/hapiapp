@@ -1,4 +1,4 @@
 import user from './user';
 import post from './post';
-
-export default { user, post };
+import movies from './movies';
+export default { user, post, movies };
